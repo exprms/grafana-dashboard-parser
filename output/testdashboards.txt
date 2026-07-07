@@ -1,0 +1,810 @@
+Found: dashboards/23991_rev3.json
+Found: dashboards/subdir/19268_rev1.json
+
+=== vLLM ===
+File: dashboards/23991_rev3.json
+
+Panel: Success Requests per Minute
+Query: increase(vllm:request_success_total{job="vllm-service", model_name!=""}[1m])
+Metrics:
+  - vllm:request_success_total
+
+Panel: Cache Utilization
+Query: vllm:gpu_cache_usage_perc{model_name="$model_name"}
+Metrics:
+  - vllm:gpu_cache_usage_perc
+
+Panel: Cache Utilization
+Query: vllm:cpu_cache_usage_perc{model_name="$model_name"}
+Metrics:
+  - vllm:cpu_cache_usage_perc
+
+Panel: Total Requests per Minute
+Query: increase(vllm:e2e_request_latency_seconds_count{job="vllm-service", model_name!=""}[1m])
+Metrics:
+  - vllm:e2e_request_latency_seconds_count
+
+Panel: Cumulative Success Requests
+Query: vllm:request_success_total{job="vllm-service", model_name!=""}
+Metrics:
+  - vllm:request_success_total
+
+Panel: Scheduler State
+Query: vllm:num_requests_running{model_name="$model_name"}
+Metrics:
+  - vllm:num_requests_running
+
+Panel: Scheduler State
+Query: vllm:num_requests_swapped{model_name="$model_name"}
+Metrics:
+  - vllm:num_requests_swapped
+
+Panel: Scheduler State
+Query: vllm:num_requests_waiting{model_name="$model_name"}
+Metrics:
+  - vllm:num_requests_waiting
+
+
+=== Prometheus All Metrics ===
+File: dashboards/subdir/19268_rev1.json
+
+Panel: Prometheus Ready
+Query: prometheus_ready{instance="$instance"}
+Metrics:
+  - prometheus_ready
+
+Panel: Configuration Reload
+Query: prometheus_config_last_reload_successful{instance="$instance"}
+Metrics:
+  - prometheus_config_last_reload_successful
+
+Panel: Targets
+Query: sum(prometheus_target_scrape_pool_targets{instance="$instance"})
+Metrics:
+  - prometheus_target_scrape_pool_targets
+
+Panel: Active Alertmanagers
+Query: prometheus_notifications_alertmanagers_discovered{instance="$instance"}
+Metrics:
+  - prometheus_notifications_alertmanagers_discovered
+
+Panel: Rule Execution
+Query: prometheus_rule_evaluation_duration_seconds{instance="$instance",quantile="0.99"}
+Metrics:
+  - prometheus_rule_evaluation_duration_seconds
+
+Panel: Oldest Value
+Query: timestamp(prometheus_tsdb_lowest_timestamp_seconds)-prometheus_tsdb_lowest_timestamp_seconds{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_lowest_timestamp_seconds
+
+Panel: File Descriptors
+Query: process_open_fds{instance="$instance"}
+Metrics:
+  - process_open_fds
+
+Panel: File Descriptors
+Query: process_max_fds{instance="$instance"}
+Metrics:
+  - process_max_fds
+
+Panel: Version
+Query: prometheus_build_info{instance="$instance"}
+Metrics:
+  - prometheus_build_info
+
+Panel: Query Log
+Query: prometheus_engine_query_log_enabled{instance="$instance"}
+Metrics:
+  - prometheus_engine_query_log_enabled
+
+Panel: Process Uptime
+Query: time() - process_start_time_seconds{job="prometheus", instance="$instance"}
+Metrics:
+  - process_start_time_seconds
+
+Panel: Configuration Reload Time
+Query: time() - prometheus_config_last_reload_success_timestamp_seconds{job="prometheus", instance="$instance"}
+Metrics:
+  - prometheus_config_last_reload_success_timestamp_seconds
+
+Panel: Local Storage
+Query: prometheus_tsdb_storage_blocks_bytes{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_storage_blocks_bytes
+
+Panel: RAM Usage
+Query: process_resident_memory_bytes{instance="$instance"}
+Metrics:
+  - process_resident_memory_bytes
+
+Panel: Sent Alerts [10m]
+Query: sum(increase(prometheus_notifications_sent_total{instance="$instance"}[10m]))
+Metrics:
+  - prometheus_notifications_sent_total
+
+Panel: Rule Group Evaluation
+Query: prometheus_rule_group_duration_seconds{instance="$instance",quantile="0.99"}
+Metrics:
+  - prometheus_rule_group_duration_seconds
+
+Panel: Active Queries
+Query: prometheus_engine_queries{instance="$instance"}
+Metrics:
+  - prometheus_engine_queries
+
+Panel: Active Queries
+Query: prometheus_engine_queries_concurrent_max{instance="$instance"}
+Metrics:
+  - prometheus_engine_queries_concurrent_max
+
+Panel: Prometheus RAM Usage
+Query: process_resident_memory_bytes{instance="$instance"}
+Metrics:
+  - process_resident_memory_bytes
+
+Panel: Sent Alerts [10m]
+Query: increase(prometheus_notifications_sent_total{instance="$instance"}[10m])
+Metrics:
+  - prometheus_notifications_sent_total
+
+Panel: Active Alertmanagers
+Query: prometheus_notifications_alertmanagers_discovered{instance="$instance"}
+Metrics:
+  - prometheus_notifications_alertmanagers_discovered
+
+Panel: Notification Queue
+Query: prometheus_notifications_queue_length{instance="$instance"}
+Metrics:
+  - prometheus_notifications_queue_length
+
+Panel: Notification Queue
+Query: prometheus_notifications_queue_capacity{instance="$instance"}
+Metrics:
+  - prometheus_notifications_queue_capacity
+
+Panel: # of Series
+Query: prometheus_tsdb_head_series{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_head_series
+
+Panel: Time Bounds
+Query: timestamp(prometheus_tsdb_head_max_time_seconds{instance="$instance"})-prometheus_tsdb_head_max_time_seconds{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_head_max_time_seconds
+
+Panel: Time Bounds
+Query: timestamp(prometheus_tsdb_head_min_time_seconds{instance="$instance"})-prometheus_tsdb_head_min_time_seconds{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_head_min_time_seconds
+
+Panel: Chunks in Head
+Query: prometheus_tsdb_head_chunks{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_head_chunks
+
+Panel: Active Appenders
+Query: prometheus_tsdb_head_active_appenders{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_head_active_appenders
+
+Panel: Targets per Job
+Query: prometheus_target_scrape_pool_targets{instance="$instance"}
+Metrics:
+  - prometheus_target_scrape_pool_targets
+
+Panel: Actual Intervals between Scrapes (p99)
+Query: prometheus_target_interval_length_seconds{instance="$instance",quantile="0.99"}
+Metrics:
+  - prometheus_target_interval_length_seconds
+
+Panel: Sync Interval
+Query: prometheus_target_sync_length_seconds{instance="$instance",quantile="0.99"}
+Metrics:
+  - prometheus_target_sync_length_seconds
+
+Panel: Metadata Cache
+Query: sum(prometheus_target_metadata_cache_bytes{instance="$instance"})
+Metrics:
+  - prometheus_target_metadata_cache_bytes
+
+Panel: Query Duration (p90)
+Query: prometheus_engine_query_duration_seconds{instance="$instance",quantile="0.9"}
+Metrics:
+  - prometheus_engine_query_duration_seconds
+
+Panel: Query Duration (p99)
+Query: prometheus_engine_query_duration_seconds{instance="$instance",quantile="0.99"}
+Metrics:
+  - prometheus_engine_query_duration_seconds
+
+Panel: Rule Execution Time
+Query: prometheus_rule_evaluation_duration_seconds{instance="$instance"}
+Metrics:
+  - prometheus_rule_evaluation_duration_seconds
+
+Panel: Rule Group Evaluation Time
+Query: prometheus_rule_group_duration_seconds{instance="$instance"}
+Metrics:
+  - prometheus_rule_group_duration_seconds
+
+Panel: Rule Groups
+Query: prometheus_rule_group_rules{instance="$instance"}
+Metrics:
+  - prometheus_rule_group_rules
+
+Panel: Rule Groups
+Query: prometheus_rule_group_last_evaluation_samples{instance="$instance"}
+Metrics:
+  - prometheus_rule_group_last_evaluation_samples
+
+Panel: Rule Groups
+Query: prometheus_rule_group_last_duration_seconds{instance="$instance"}
+Metrics:
+  - prometheus_rule_group_last_duration_seconds
+
+Panel: Rule Groups
+Query: prometheus_rule_group_interval_seconds{instance="$instance"}
+Metrics:
+  - prometheus_rule_group_interval_seconds
+
+Panel: Appender Lag
+Query: time() - prometheus_remote_storage_highest_timestamp_in_seconds{instance="$instance"}
+Metrics:
+  - prometheus_remote_storage_highest_timestamp_in_seconds
+
+Panel: Remote Storage Stats
+Query: prometheus_remote_storage_max_samples_per_send{instance="$instance"}
+Metrics:
+  - prometheus_remote_storage_max_samples_per_send
+
+Panel: Remote Storage Stats
+Query: prometheus_remote_storage_samples_pending{instance="$instance"}
+Metrics:
+  - prometheus_remote_storage_samples_pending
+
+Panel: Discovered Scrape Targets
+Query: prometheus_sd_discovered_targets{instance="$instance",name="scrape"}
+Metrics:
+  - prometheus_sd_discovered_targets
+
+Panel: SD Latency (p99)
+Query: prometheus_sd_file_scan_duration_seconds{instance="$instance",quantile="0.99"}>0
+Metrics:
+  - prometheus_sd_file_scan_duration_seconds
+
+Panel: SD Latency (p99)
+Query: prometheus_sd_consul_rpc_duration_seconds{instance="$instance",quantile="0.99"}>0
+Metrics:
+  - prometheus_sd_consul_rpc_duration_seconds
+
+Panel: SD Latency (p99)
+Query: prometheus_sd_kuma_fetch_duration_seconds{instance="$instance",quantile="0.99"}>0
+Metrics:
+  - prometheus_sd_kuma_fetch_duration_seconds
+
+Panel: ZK Watchers
+Query: prometheus_treecache_watcher_goroutines{instance="$instance"}
+Metrics:
+  - prometheus_treecache_watcher_goroutines
+
+Panel: File SD mtime
+Query: time() - prometheus_sd_file_mtime_seconds{instance="$instance"}
+Metrics:
+  - prometheus_sd_file_mtime_seconds
+
+Panel: WAL fsync Duration
+Query: prometheus_tsdb_wal_fsync_duration_seconds{instance="$instance",quantile="0.99"}
+Metrics:
+  - prometheus_tsdb_wal_fsync_duration_seconds
+
+Panel: Local Storage
+Query: prometheus_tsdb_storage_blocks_bytes{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_storage_blocks_bytes
+
+Panel: Data Blocks
+Query: prometheus_tsdb_blocks_loaded{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_blocks_loaded
+
+Panel: TSDB Clean Start
+Query: prometheus_tsdb_clean_start{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_clean_start
+
+Panel: Replay Time
+Query: prometheus_tsdb_data_replay_duration_seconds{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_data_replay_duration_seconds
+
+Panel: Symbol Table RAM
+Query: prometheus_tsdb_symbol_table_size_bytes{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_symbol_table_size_bytes
+
+Panel: Size Retention Limit
+Query: prometheus_tsdb_retention_limit_bytes{instance="$instance"}
+Metrics:
+  - prometheus_tsdb_retention_limit_bytes
+
+
+
+========================================
+
+
+=================================================
+process_max_fds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : File Descriptors
+Query     : process_max_fds{instance="$instance"}
+
+
+=================================================
+process_open_fds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : File Descriptors
+Query     : process_open_fds{instance="$instance"}
+
+
+=================================================
+process_resident_memory_bytes
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : RAM Usage
+Query     : process_resident_memory_bytes{instance="$instance"}
+
+Dashboard : Prometheus All Metrics
+Panel     : Prometheus RAM Usage
+Query     : process_resident_memory_bytes{instance="$instance"}
+
+
+=================================================
+process_start_time_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Process Uptime
+Query     : time() - process_start_time_seconds{job="prometheus", instance="$instance"}
+
+
+=================================================
+prometheus_build_info
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Version
+Query     : prometheus_build_info{instance="$instance"}
+
+
+=================================================
+prometheus_config_last_reload_success_timestamp_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Configuration Reload Time
+Query     : time() - prometheus_config_last_reload_success_timestamp_seconds{job="prometheus", instance="$instance"}
+
+
+=================================================
+prometheus_config_last_reload_successful
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Configuration Reload
+Query     : prometheus_config_last_reload_successful{instance="$instance"}
+
+
+=================================================
+prometheus_engine_queries
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Active Queries
+Query     : prometheus_engine_queries{instance="$instance"}
+
+
+=================================================
+prometheus_engine_queries_concurrent_max
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Active Queries
+Query     : prometheus_engine_queries_concurrent_max{instance="$instance"}
+
+
+=================================================
+prometheus_engine_query_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Query Duration (p90)
+Query     : prometheus_engine_query_duration_seconds{instance="$instance",quantile="0.9"}
+
+Dashboard : Prometheus All Metrics
+Panel     : Query Duration (p99)
+Query     : prometheus_engine_query_duration_seconds{instance="$instance",quantile="0.99"}
+
+
+=================================================
+prometheus_engine_query_log_enabled
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Query Log
+Query     : prometheus_engine_query_log_enabled{instance="$instance"}
+
+
+=================================================
+prometheus_notifications_alertmanagers_discovered
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Active Alertmanagers
+Query     : prometheus_notifications_alertmanagers_discovered{instance="$instance"}
+
+Dashboard : Prometheus All Metrics
+Panel     : Active Alertmanagers
+Query     : prometheus_notifications_alertmanagers_discovered{instance="$instance"}
+
+
+=================================================
+prometheus_notifications_queue_capacity
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Notification Queue
+Query     : prometheus_notifications_queue_capacity{instance="$instance"}
+
+
+=================================================
+prometheus_notifications_queue_length
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Notification Queue
+Query     : prometheus_notifications_queue_length{instance="$instance"}
+
+
+=================================================
+prometheus_notifications_sent_total
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Sent Alerts [10m]
+Query     : sum(increase(prometheus_notifications_sent_total{instance="$instance"}[10m]))
+
+Dashboard : Prometheus All Metrics
+Panel     : Sent Alerts [10m]
+Query     : increase(prometheus_notifications_sent_total{instance="$instance"}[10m])
+
+
+=================================================
+prometheus_ready
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Prometheus Ready
+Query     : prometheus_ready{instance="$instance"}
+
+
+=================================================
+prometheus_remote_storage_highest_timestamp_in_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Appender Lag
+Query     : time() - prometheus_remote_storage_highest_timestamp_in_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_remote_storage_max_samples_per_send
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Remote Storage Stats
+Query     : prometheus_remote_storage_max_samples_per_send{instance="$instance"}
+
+
+=================================================
+prometheus_remote_storage_samples_pending
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Remote Storage Stats
+Query     : prometheus_remote_storage_samples_pending{instance="$instance"}
+
+
+=================================================
+prometheus_rule_evaluation_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Rule Execution
+Query     : prometheus_rule_evaluation_duration_seconds{instance="$instance",quantile="0.99"}
+
+Dashboard : Prometheus All Metrics
+Panel     : Rule Execution Time
+Query     : prometheus_rule_evaluation_duration_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_rule_group_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Rule Group Evaluation
+Query     : prometheus_rule_group_duration_seconds{instance="$instance",quantile="0.99"}
+
+Dashboard : Prometheus All Metrics
+Panel     : Rule Group Evaluation Time
+Query     : prometheus_rule_group_duration_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_rule_group_interval_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Rule Groups
+Query     : prometheus_rule_group_interval_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_rule_group_last_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Rule Groups
+Query     : prometheus_rule_group_last_duration_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_rule_group_last_evaluation_samples
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Rule Groups
+Query     : prometheus_rule_group_last_evaluation_samples{instance="$instance"}
+
+
+=================================================
+prometheus_rule_group_rules
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Rule Groups
+Query     : prometheus_rule_group_rules{instance="$instance"}
+
+
+=================================================
+prometheus_sd_consul_rpc_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : SD Latency (p99)
+Query     : prometheus_sd_consul_rpc_duration_seconds{instance="$instance",quantile="0.99"}>0
+
+
+=================================================
+prometheus_sd_discovered_targets
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Discovered Scrape Targets
+Query     : prometheus_sd_discovered_targets{instance="$instance",name="scrape"}
+
+
+=================================================
+prometheus_sd_file_mtime_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : File SD mtime
+Query     : time() - prometheus_sd_file_mtime_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_sd_file_scan_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : SD Latency (p99)
+Query     : prometheus_sd_file_scan_duration_seconds{instance="$instance",quantile="0.99"}>0
+
+
+=================================================
+prometheus_sd_kuma_fetch_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : SD Latency (p99)
+Query     : prometheus_sd_kuma_fetch_duration_seconds{instance="$instance",quantile="0.99"}>0
+
+
+=================================================
+prometheus_target_interval_length_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Actual Intervals between Scrapes (p99)
+Query     : prometheus_target_interval_length_seconds{instance="$instance",quantile="0.99"}
+
+
+=================================================
+prometheus_target_metadata_cache_bytes
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Metadata Cache
+Query     : sum(prometheus_target_metadata_cache_bytes{instance="$instance"})
+
+
+=================================================
+prometheus_target_scrape_pool_targets
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Targets
+Query     : sum(prometheus_target_scrape_pool_targets{instance="$instance"})
+
+Dashboard : Prometheus All Metrics
+Panel     : Targets per Job
+Query     : prometheus_target_scrape_pool_targets{instance="$instance"}
+
+
+=================================================
+prometheus_target_sync_length_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Sync Interval
+Query     : prometheus_target_sync_length_seconds{instance="$instance",quantile="0.99"}
+
+
+=================================================
+prometheus_treecache_watcher_goroutines
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : ZK Watchers
+Query     : prometheus_treecache_watcher_goroutines{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_blocks_loaded
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Data Blocks
+Query     : prometheus_tsdb_blocks_loaded{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_clean_start
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : TSDB Clean Start
+Query     : prometheus_tsdb_clean_start{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_data_replay_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Replay Time
+Query     : prometheus_tsdb_data_replay_duration_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_head_active_appenders
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Active Appenders
+Query     : prometheus_tsdb_head_active_appenders{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_head_chunks
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Chunks in Head
+Query     : prometheus_tsdb_head_chunks{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_head_max_time_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Time Bounds
+Query     : timestamp(prometheus_tsdb_head_max_time_seconds{instance="$instance"})-prometheus_tsdb_head_max_time_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_head_min_time_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Time Bounds
+Query     : timestamp(prometheus_tsdb_head_min_time_seconds{instance="$instance"})-prometheus_tsdb_head_min_time_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_head_series
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : # of Series
+Query     : prometheus_tsdb_head_series{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_lowest_timestamp_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Oldest Value
+Query     : timestamp(prometheus_tsdb_lowest_timestamp_seconds)-prometheus_tsdb_lowest_timestamp_seconds{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_retention_limit_bytes
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Size Retention Limit
+Query     : prometheus_tsdb_retention_limit_bytes{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_storage_blocks_bytes
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Local Storage
+Query     : prometheus_tsdb_storage_blocks_bytes{instance="$instance"}
+
+Dashboard : Prometheus All Metrics
+Panel     : Local Storage
+Query     : prometheus_tsdb_storage_blocks_bytes{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_symbol_table_size_bytes
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : Symbol Table RAM
+Query     : prometheus_tsdb_symbol_table_size_bytes{instance="$instance"}
+
+
+=================================================
+prometheus_tsdb_wal_fsync_duration_seconds
+=================================================
+Dashboard : Prometheus All Metrics
+Panel     : WAL fsync Duration
+Query     : prometheus_tsdb_wal_fsync_duration_seconds{instance="$instance",quantile="0.99"}
+
+
+=================================================
+vllm:cpu_cache_usage_perc
+=================================================
+Dashboard : vLLM
+Panel     : Cache Utilization
+Query     : vllm:cpu_cache_usage_perc{model_name="$model_name"}
+
+
+=================================================
+vllm:e2e_request_latency_seconds_count
+=================================================
+Dashboard : vLLM
+Panel     : Total Requests per Minute
+Query     : increase(vllm:e2e_request_latency_seconds_count{job="vllm-service", model_name!=""}[1m])
+
+
+=================================================
+vllm:gpu_cache_usage_perc
+=================================================
+Dashboard : vLLM
+Panel     : Cache Utilization
+Query     : vllm:gpu_cache_usage_perc{model_name="$model_name"}
+
+
+=================================================
+vllm:num_requests_running
+=================================================
+Dashboard : vLLM
+Panel     : Scheduler State
+Query     : vllm:num_requests_running{model_name="$model_name"}
+
+
+=================================================
+vllm:num_requests_swapped
+=================================================
+Dashboard : vLLM
+Panel     : Scheduler State
+Query     : vllm:num_requests_swapped{model_name="$model_name"}
+
+
+=================================================
+vllm:num_requests_waiting
+=================================================
+Dashboard : vLLM
+Panel     : Scheduler State
+Query     : vllm:num_requests_waiting{model_name="$model_name"}
+
+
+=================================================
+vllm:request_success_total
+=================================================
+Dashboard : vLLM
+Panel     : Success Requests per Minute
+Query     : increase(vllm:request_success_total{job="vllm-service", model_name!=""}[1m])
+
+Dashboard : vLLM
+Panel     : Cumulative Success Requests
+Query     : vllm:request_success_total{job="vllm-service", model_name!=""}
+

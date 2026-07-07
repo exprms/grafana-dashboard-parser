@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-	"sort"
+	// "sort"
 
 	"grafana-dashboard-parser/internal/analyzer"
 	"grafana-dashboard-parser/internal/dashboard"
 	"grafana-dashboard-parser/internal/model"
+	"grafana-dashboard-parser/internal/report"
 )
 
 func main() {
@@ -36,28 +37,33 @@ func main() {
 		dashboards = append(dashboards, info)
 	}
 
-	printDashboardOverview(dashboards)
+	report.PrintDashboardOverview(dashboards)
+	
+	fmt.Println("\n\n========================================\n")
+
+	report.PrintMetricsOverview(dashboards)
 }
 
-func printDashboardOverview(dashboards []*model.DashboardInfo) {
-
-	for _, dashboard := range dashboards {
-
-		fmt.Printf("\n%s\n", dashboard.Title)
-		fmt.Printf("%s\n", dashboard.File)
-
-		for _, query := range dashboard.Queries {
-
-			fmt.Printf("\nPanel: %s\n", query.PanelTitle)
-			fmt.Printf("Query: %s\n", query.Expr)
-
-			sort.Strings(query.Metrics)
-
-			fmt.Println("Metrics:")
-
-			for _, metric := range query.Metrics {
-				fmt.Printf("  - %s\n", metric)
-			}
-		}
-	}
-}
+//
+//func printDashboardOverview(dashboards []*model.DashboardInfo) {
+//
+//	for _, dashboard := range dashboards {
+//
+//		fmt.Printf("\n%s\n", dashboard.Title)
+//		fmt.Printf("%s\n", dashboard.File)
+//
+//		for _, query := range dashboard.Queries {
+//
+//			fmt.Printf("\nPanel: %s\n", query.PanelTitle)
+//			fmt.Printf("Query: %s\n", query.Expr)
+//
+//			sort.Strings(query.Metrics)
+//
+//			fmt.Println("Metrics:")
+//
+//			for _, metric := range query.Metrics {
+//				fmt.Printf("  - %s\n", metric)
+//			}
+//		}
+//	}
+//}
