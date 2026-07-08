@@ -7,7 +7,6 @@ import (
 	"grafana-dashboard-parser/internal/model"
 )
 
-
 func PrintMetricsOverview(catalog *model.Catalog) {
 
 	var metrics []string
