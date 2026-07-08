@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"flag"
+	// "fmt"
 	"log"
-	// "sort"
 
 	"grafana-dashboard-parser/internal/analyzer"
 	"grafana-dashboard-parser/internal/dashboard"
@@ -13,7 +13,21 @@ import (
 
 func main() {
 
-	files, err := dashboard.ReadDashboards("./dashboards")
+	dashboardDir := flag.String(
+		"dir",
+		"./dashboards",
+		"Directory containing Grafana dashboards",
+	)
+
+	reportType := flag.String(
+		"report",
+		"",
+		"Report to generate (dashboards|metrics)",
+	)
+
+	flag.Parse()
+
+	files, err := dashboard.ReadDashboards(*dashboardDir)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,34 +50,21 @@ func main() {
 
 		dashboards = append(dashboards, info)
 	}
-
-	report.PrintDashboardOverview(dashboards)
 	
-	fmt.Println("\n\n========================================\n")
+	catalog := analyzer.BuildCatalog(dashboards)
 
-	report.PrintMetricsOverview(dashboards)
+	switch *reportType {
+
+	case "":
+		report.PrintDashboardFiles(catalog)
+
+	case report.ReportDashboards:
+		report.PrintDashboardOverview(catalog)
+
+	case report.ReportMetrics:
+		report.PrintMetricsOverview(catalog)
+
+	default:
+		log.Fatalf("Unknown report type: %s", *reportType)
+	}
 }
-
-//
-//func printDashboardOverview(dashboards []*model.DashboardInfo) {
-//
-//	for _, dashboard := range dashboards {
-//
-//		fmt.Printf("\n%s\n", dashboard.Title)
-//		fmt.Printf("%s\n", dashboard.File)
-//
-//		for _, query := range dashboard.Queries {
-//
-//			fmt.Printf("\nPanel: %s\n", query.PanelTitle)
-//			fmt.Printf("Query: %s\n", query.Expr)
-//
-//			sort.Strings(query.Metrics)
-//
-//			fmt.Println("Metrics:")
-//
-//			for _, metric := range query.Metrics {
-//				fmt.Printf("  - %s\n", metric)
-//			}
-//		}
-//	}
-//}

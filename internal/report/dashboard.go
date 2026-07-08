@@ -7,9 +7,9 @@ import (
 	"grafana-dashboard-parser/internal/model"
 )
 
-func PrintDashboardOverview(dashboards []*model.DashboardInfo) {
+func PrintDashboardOverview(catalog *model.Catalog) {
 
-	for _, dashboard := range dashboards {
+	for _, dashboard := range catalog.Dashboards {
 
 		fmt.Printf("\n=== %s ===\n", dashboard.Title)
 		fmt.Printf("File: %s\n", dashboard.File)

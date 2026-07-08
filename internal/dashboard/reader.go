@@ -1,7 +1,7 @@
 package dashboard
 
 import (
-	"fmt"
+	// "fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -30,7 +30,7 @@ func ReadDashboards(root string) (map[string][]byte, error) {
 			return err
 		}
 
-		fmt.Println("Found:", path)
+		// fmt.Println("Found:", path)
 		result[path] = data
 
 		return nil
